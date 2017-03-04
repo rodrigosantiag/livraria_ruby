@@ -3,17 +3,24 @@ class Livro
 
   def initialize(titulo, preco, ano_lancamento)
     @titulo = titulo
-    @preco = preco
     @ano_lancamento = ano_lancamento
+    @preco = aplica_promocao preco
   end
 
-  ruby = Livro.new("Livro de RUby", 10, 1998)
-  rails = Livro.new("Livro de Rails", 20, 2000)
-
-  livros = [ruby, rails]
-
-  livros.each do |livro|
-    puts "#{livro.titulo} - #{livro.preco}"
+  private
+  def aplica_promocao(base)
+    if @ano_lancamento < 2000
+      base *= 0.7
+    else
+      base
+    end
   end
+end
 
+def exibe_newsletter(livro)
+  if livro.ano_lancamento < 2000
+    puts "Newsletter"
+    puts livro.titulo
+    puts livro.preco
+  end
 end
