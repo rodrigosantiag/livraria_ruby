@@ -20,6 +20,10 @@ class Livro
     end
   end
 
+  def to_csv
+    "#{@titulo},#{@ano_lancamento},#{@preco}"
+  end
+
   private
   def calcula_preco(base)
     if @ano_lancamento < 2006
@@ -37,7 +41,6 @@ class Livro
 end
 
 class Estoque
-  attr_reader :livros
 
   def initialize
     @livros = []
@@ -45,7 +48,7 @@ class Estoque
 
   def exporta_csv
     @livros.each do |livro|
-      puts "#{livro.titulo},#{livro.ano_lancamento}"
+      puts livro.to_csv
     end
   end
 
@@ -59,6 +62,10 @@ class Estoque
     end
   end
 
+  def adiciona(livro)
+    @livros << livro if livro
+  end
+
 end
 
 algoritmos = Livro.new("Algoritmos", 100, 1998, true)
@@ -68,10 +75,8 @@ arquitetura = Livro.new("Introdução à Arquitetura e Design de Software", 70, 
 
 estoque = Estoque.new
 
-estoque.livros << algoritmos
-estoque.livros << arquitetura
+estoque.adiciona algoritmos
+estoque.adiciona arquitetura
+estoque.adiciona nil
 
-baratos = estoque.mais_baratos_que 800
-
-puts baratos
-puts estoque.total
+estoque.exporta_csv
