@@ -40,10 +40,35 @@ class Livro
   end
 end
 
+module Contador
+  def maximo_necessario
+    if @maximo_necessario.nil? || @maximo_necessario < size
+      @maximo_necessario = size
+    end
+    @maximo_necessario
+  end
+end
+
 class Estoque
+
+  attr_reader :livros
 
   def initialize
     @livros = []
+    @livros.extend Contador
+  end
+
+  def << (livro)
+    @livros << livro if livro
+    self
+  end
+
+  def maximo_necessario
+    @livros.maximo_necessario
+  end
+
+  def remove(livro)
+    @livros.delete livro
   end
 
   def exporta_csv
@@ -70,13 +95,17 @@ end
 
 algoritmos = Livro.new("Algoritmos", 100, 1998, true)
 arquitetura = Livro.new("Introdução à Arquitetura e Design de Software", 70, 2011, true)
-
-#estoque = [algoritmos, arquitetura]
+programmer = Livro.new("Livro Programmer", 150, 1999, true)
+outro_livro = Livro.new("Livro Qualuer", 200, 2017, true)
 
 estoque = Estoque.new
 
-estoque.adiciona algoritmos
-estoque.adiciona arquitetura
-estoque.adiciona nil
+estoque << algoritmos
+puts estoque.maximo_necessario
+estoque << arquitetura
+puts estoque.maximo_necessario
+estoque << programmer << outro_livro
+puts estoque.maximo_necessario
 
-estoque.exporta_csv
+estoque.remove outro_livro
+puts estoque.maximo_necessario
