@@ -93,19 +93,44 @@ class Estoque
 
 end
 
-algoritmos = Livro.new("Algoritmos", 100, 1998, true)
-arquitetura = Livro.new("Introdução à Arquitetura e Design de Software", 70, 2011, true)
-programmer = Livro.new("Livro Programmer", 150, 1999, true)
-outro_livro = Livro.new("Livro Qualuer", 200, 2017, true)
+class Conversor
+  def string_para_alfanumerico(titulo)
+    titulo.gsub /[^\w\s]/,''
+  end
+end
 
-estoque = Estoque.new
 
-estoque << algoritmos
-puts estoque.maximo_necessario
-estoque << arquitetura
-puts estoque.maximo_necessario
-estoque << programmer << outro_livro
-puts estoque.maximo_necessario
+# algoritmos = Livro.new("Algoritmos ** teste", 100, 1998, true)
+# arquitetura = Livro.new("Introdução à Arquitetura e Design de Software", 70, 2011, true)
+# programmer = Livro.new("Livro Programmer", 150, 1999, true)
+# outro_livro = Livro.new("Livro Qualuer", 200, 2017, true)
+#
+# estoque = Estoque.new
+#
+# estoque << algoritmos
+# puts estoque.maximo_necessario
+# estoque << arquitetura
+# puts estoque.maximo_necessario
+# estoque << programmer << outro_livro
+# puts estoque.maximo_necessario
+#
+# estoque.remove outro_livro
+# puts estoque.maximo_necessario
+#
+# conversor = Conversor.new
+#
+# puts conversor.string_para_alfanumerico algoritmos.titulo
 
-estoque.remove outro_livro
-puts estoque.maximo_necessario
+livros_computacao = ["Agile Web Development with Rails", "Domain Driven Design", "Programming Ruby 1.9", "Agile Web Development with Rails"]
+
+def livros_computacao.removeRepetidos
+  array_sem_repeticao = []
+  self.each do |value|
+    array_sem_repeticao.push value unless array_sem_repeticao.include? value
+  end
+
+  array_sem_repeticao.length
+end
+
+puts livros_computacao.removeRepetidos
+
