@@ -1,11 +1,12 @@
 class Livro
-  attr_reader :titulo, :preco, :ano_lancamento, :possui_reimpressao
+  attr_reader :titulo, :preco, :ano_lancamento, :possui_reimpressao, :editora
 
-  def initialize(titulo, preco, ano_lancamento, possui_reimpressao)
+  def initialize(titulo, preco, ano_lancamento, possui_reimpressao, editora)
     @titulo = titulo
     @ano_lancamento = ano_lancamento
     @preco = calcula_preco preco
     @possui_reimpressao = possui_reimpressao
+    @editora = editora
   end
 
   def possui_reimpressao?
@@ -39,98 +40,4 @@ class Livro
     end
   end
 end
-
-module Contador
-  def maximo_necessario
-    if @maximo_necessario.nil? || @maximo_necessario < size
-      @maximo_necessario = size
-    end
-    @maximo_necessario
-  end
-end
-
-class Estoque
-
-  attr_reader :livros
-
-  def initialize
-    @livros = []
-    @livros.extend Contador
-  end
-
-  def << (livro)
-    @livros << livro if livro
-    self
-  end
-
-  def maximo_necessario
-    @livros.maximo_necessario
-  end
-
-  def remove(livro)
-    @livros.delete livro
-  end
-
-  def exporta_csv
-    @livros.each do |livro|
-      puts livro.to_csv
-    end
-  end
-
-  def total
-    @livros.size
-  end
-
-  def mais_baratos_que(valor)
-    @livros.select do |livro|
-      livro.preco < valor
-    end
-  end
-
-  def adiciona(livro)
-    @livros << livro if livro
-  end
-
-end
-
-class Conversor
-  def string_para_alfanumerico(titulo)
-    titulo.gsub /[^\w\s]/,''
-  end
-end
-
-
-# algoritmos = Livro.new("Algoritmos ** teste", 100, 1998, true)
-# arquitetura = Livro.new("Introdução à Arquitetura e Design de Software", 70, 2011, true)
-# programmer = Livro.new("Livro Programmer", 150, 1999, true)
-# outro_livro = Livro.new("Livro Qualuer", 200, 2017, true)
-#
-# estoque = Estoque.new
-#
-# estoque << algoritmos
-# puts estoque.maximo_necessario
-# estoque << arquitetura
-# puts estoque.maximo_necessario
-# estoque << programmer << outro_livro
-# puts estoque.maximo_necessario
-#
-# estoque.remove outro_livro
-# puts estoque.maximo_necessario
-#
-# conversor = Conversor.new
-#
-# puts conversor.string_para_alfanumerico algoritmos.titulo
-
-livros_computacao = ["Agile Web Development with Rails", "Domain Driven Design", "Programming Ruby 1.9", "Agile Web Development with Rails"]
-
-def livros_computacao.removeRepetidos
-  array_sem_repeticao = []
-  self.each do |value|
-    array_sem_repeticao.push value unless array_sem_repeticao.include? value
-  end
-
-  array_sem_repeticao.length
-end
-
-puts livros_computacao.removeRepetidos
 
