@@ -12,5 +12,7 @@ estoque << algoritmos << algoritmos << algoritmos << arquitetura << programmer <
 estoque.vende algoritmos
 estoque.vende algoritmos
 estoque.vende programmer
+estoque.vende programmer
+estoque.vende programmer
 
-puts estoque.quantidade_de_vendas_de_titulo outro_livro
+puts estoque.livro_que_mais_vendeu_por(&:editora).titulo
