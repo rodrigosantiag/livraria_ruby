@@ -48,8 +48,8 @@ class Estoque
     @vendas.count{|venda| campo.call(venda) == campo.call(produto) }
   end
 
-  def livro_que_mais_vendeu_por(&campo)
-    @vendas.sort {|v1,v2| quantidade_de_vendas_por(v1, &campo) <=> quantidade_de_vendas_por(v2, &campo)}.last
+  def que_mais_vendeu_por(tipo, &campo)
+    @vendas.select{|t| t.tipo == tipo}.sort {|v1,v2| quantidade_de_vendas_por(v1, &campo) <=> quantidade_de_vendas_por(v2, &campo)}.last
   end
 
 end
