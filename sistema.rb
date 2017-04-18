@@ -1,13 +1,15 @@
 require_relative "livro"
+require_relative "revista"
+require_relative "ebook"
 require_relative "estoque"
 
-algoritmos = Livro.new("Algoritmos ** teste", 100, 1998, true, "Editora 1", "livro")
-arquitetura = Livro.new("Introdução à Arquitetura e Design de Software", 70, 2011, true, "Editora 2", "livro")
-programmer = Livro.new("Livro Programmer", 150, 1999, true, "Editora 3", "livro")
-outro_livro = Livro.new("Livro Qualuer", 200, 2017, true, "Editora 1", "livro")
-revistona = Livro.new("Revista Ruby", 20, 2012, true, "Editora de revista", "revista")
-revistona2 = Livro.new("Revista Ruby Refatoração", 10, 1998, true, "Editora de revista", "revista")
-online_arquitetura = Livro.new("Introdução a Arquitetura e Design de Software", 50, 2012, true, "editora", "ebook")
+algoritmos = Livro.new("Algoritmos ** teste", 100, 1998, true, "Editora 1", true)
+arquitetura = Livro.new("Introdução à Arquitetura e Design de Software", 70, 2011, true, "Editora 2", false)
+programmer = Livro.new("Livro Programmer", 150, 1999, true, "Editora 3", false)
+outro_livro = Livro.new("Livro Qualuer", 200, 2017, true, "Editora 1", true)
+revistona = Revista.new("Revista Ruby", 20, 2012, true, "Editora de revista", 1)
+revistona2 = Revista.new("Revista Ruby Refatoração", 10, 1998, true, "Editora de revista", 10)
+online_arquitetura = EBook.new("Introdução a Arquitetura e Design de Software", 50, 2012, "editora")
 
 estoque = Estoque.new
 

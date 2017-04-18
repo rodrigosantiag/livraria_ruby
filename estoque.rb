@@ -49,7 +49,7 @@ class Estoque
   end
 
   def que_mais_vendeu_por(tipo, &campo)
-    @vendas.select{|t| t.tipo == tipo}.sort {|v1,v2| quantidade_de_vendas_por(v1, &campo) <=> quantidade_de_vendas_por(v2, &campo)}.last
+    @vendas.select{|produto| produto.matches?(tipo)}.sort {|v1,v2| quantidade_de_vendas_por(v1, &campo) <=> quantidade_de_vendas_por(v2, &campo)}.last
   end
 
   def method_missing(name)
@@ -64,7 +64,8 @@ class Estoque
   end
 
   def respond_to?(name)
-    name.to_s.match "(.+)_que_mais_vendeu_por_(.+)" || super
+    matched = name.to_s.match "(.+)_que_mais_vendeu_por_(.+)"
+    !!matched || super
   end
 
 end
